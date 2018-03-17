@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<title>Create Database</title>
@@ -33,13 +33,53 @@
 
 </table>
 
-</form>
+</form> -->
 <?php
 
 
   ini_set('display_errors', 0);		
 
   if(filesize('connection.php') == 0){
+    ?>
+
+    <!DOCTYPE html>
+<html>
+<head>
+  <title>Create Database</title>
+</head>
+<body>
+<form method="POST" >
+<table>
+
+<tr>  
+  <td>Enter HostName</td>   
+    <td><input type="text" name="host"></td>    
+</tr>
+
+<tr>  
+  <td>Enter Username</td>   
+    <td><input type="text" name="username"></td>
+</tr>
+
+<tr>  
+  <td>Enter Password</td>   
+    <td><input type="password" name="password" ></td>
+</tr>
+
+<tr>  
+  <td>Enter DatabaseName</td> 
+    <td><input type="text" name="database"></td>
+</tr>
+
+<tr>  
+  <td colspan="2"><input type="submit" value="Submit" name="submit"></td> 
+</tr>
+
+</table>
+
+</form>
+<?php
+ 
   
 if (isset($_POST['host']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['database'])) {	
         // Create database
@@ -92,6 +132,11 @@ if (isset($_POST['host']) && isset($_POST['username']) && isset($_POST['password
 
 else{
   echo "This site already has database setup";
+
+  ?>
+<a href="home.php" >Click Here </a>
+
+  <?php
   //header("Location: home.php");
 }
 
