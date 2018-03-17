@@ -1,42 +1,4 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-	<title>Create Database</title>
-</head>
-<body>
-<form method="POST" >
-<table>
-
-<tr>	
-	<td>Enter HostName</td>		
-		<td><input type="text" name="host"></td>		
-</tr>
-
-<tr>	
-	<td>Enter Username</td>		
-		<td><input type="text" name="username"></td>
-</tr>
-
-<tr>	
-	<td>Enter Password</td>		
-		<td><input type="password" name="password" ></td>
-</tr>
-
-<tr>	
-	<td>Enter DatabaseName</td>	
-		<td><input type="text" name="database"></td>
-</tr>
-
-<tr>	
-	<td colspan="2"><input type="submit" value="Submit" name="submit"></td>	
-</tr>
-
-</table>
-
-</form> -->
 <?php
-
-
   ini_set('display_errors', 0);		
 
   if(filesize('connection.php') == 0){
