@@ -7,7 +7,7 @@ session_start();
   <title>Login Page</title>
 </head>
 <body>
-<form method="post" action="home.php">
+<form method="post" action="">
   <table>
     <tr>
       <td>Username*</td>
@@ -38,9 +38,9 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
     echo "<br>";
   if(mysqli_num_rows($result2) > 0){
     echo "Valid Password";
-  $_SESSION['user']=$_POST['username'];
-  echo "<br>";
-  print_r($_SESSION['user']);
+     $_SESSION['user']=$_POST['username'];
+    print_r($_SESSION);
+    header("location:home.php");
   }
    else{
       echo "Invalid Password";
