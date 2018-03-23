@@ -1,10 +1,13 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Login Page</title>
 </head>
 <body>
-<form method="post">
+<form method="post" action="home.php">
   <table>
     <tr>
       <td>Username*</td>
@@ -19,15 +22,15 @@
     </tr>
   </table>
 </form>
-</body>
 <?php
 include "connection.php";
 $con=mysqli_connect($databases['host'],$databases['user'],$databases['pass'],$databases['database']);
 if(isset($_POST['username']) && isset($_POST['password'])) { 
   $user=$_POST['username'];
   $password=$_POST['password'];
+  $passenc=md5($_POST['password']);
   $sql="SELECT username from users where username='$user'";
-  $sql2="SELECT password from users where password='$password'";
+  $sql2="SELECT password from users where password='$passenc'";
   $result=mysqli_query($con,$sql);
   $result2=mysqli_query($con,$sql2);
   if(mysqli_num_rows($result) > 0 ) {
@@ -35,6 +38,9 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
     echo "<br>";
   if(mysqli_num_rows($result2) > 0){
     echo "Valid Password";
+  $_SESSION['user']=$_POST['username'];
+  echo "<br>";
+  print_r($_SESSION['user']);
   }
    else{
       echo "Invalid Password";
@@ -46,4 +52,5 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 }
 
 ?>
+</body>
 </html>
