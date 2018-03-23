@@ -19,23 +19,22 @@
       </tr>
       <tr>
         <td>Role*</td>
-        <td><select><option value="User">User</option>
-                                <option value="Company">Company</option>
-                                <option value="Admin">Admin</option>
-                    </select>
+        <td><select name="roles"><option value="User">User</option>
+                                                        <option value="Company">Company</option>
+                                                        <option value="Admin">Admin</option>
+                 </select>
         </td>
       </tr>
-      <tr>
+     <!--  <tr>
         <td>Created_date*</td>
         <td><input type="date" name="cdate" ></td>
         <td></div></td>
-      </tr>
-      <tr>
-      <tr>
+      </tr> -->
+      <!-- <tr>
         <td>Status*</td>
         <td><select><option value="Active">Active</option><option value="Non-Active">Non-Active</option></select></td>
         <td><div></div></div></td>
-      </tr>
+      </tr> -->
         <td>Password*</td>
         <td><input type="password" placeholder="Enter 6 chracter password" id="password" name="password" onkeyup="matchPassword()"></td>
         <td><div type="text" id="message" ></div></td>
@@ -66,7 +65,9 @@ $con = mysqli_connect($databases['host'],$databases['user'],$databases['pass'],$
   if(isset($_POST['uname']) && isset($_POST['email']) && isset($_POST['password'])){
   $user = $_POST['uname'];
   $pass= $_POST['password'];
+  $passenc=md5($_POST['password']);
   $email= $_POST['email'];
+  $role=$_POST['roles'];
   $user_error="SELECT username from users where username='$user'";
   $mail_error ="SELECT email from users where email='$email'";
 
@@ -80,9 +81,10 @@ if (mysqli_num_rows($user_result) > 0) {
   }
 else{
   
-  $sql = "INSERT INTO users (username, email, password)
-     VALUES ('".$_POST["uname"]."','".$_POST["email"]."','".$_POST["password"]."')";
-
+  $sql = "INSERT INTO users (username, email, password,role)
+     VALUES ('".$_POST["uname"]."','".$_POST['email']."','".$passenc."','".$_POST['roles']."')";
+    // echo $passenc;
+     print_r($sql);
     if(mysqli_query($con,$sql)) {
       echo "1 record inserted";
     }
