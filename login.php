@@ -18,7 +18,7 @@ session_start();
      <td><input type="password" name="password" placeholder="Enter valid password"></td>
     </tr>
     <tr>
-      <td><input type="submit" value="login">Login</td>
+      <td><input type="submit" value="login"></td>
     </tr>
   </table>
 </form>
