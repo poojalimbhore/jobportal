@@ -62,7 +62,7 @@ if (!empty($_POST['uname']) && !empty($_POST['email'])) {
   $username=$_POST['uname'];
   $email=$_POST['email'];
   $id1=$_POST['id'];
-  print_r($username);
+  //print_r($username);
   
   $sql1="UPDATE users set username='$username',email='$email' where uid='$id1'";
   print_r($sql1);
