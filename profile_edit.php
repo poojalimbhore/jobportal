@@ -2,22 +2,29 @@
 <html>
 <head>
   <title>Edit User Form</title>
-  <script type="text/javascript" src="validation.js"></script>
+  <script type="text/javascript" src="js/validation.js"></script>
 </head>
 <body>
 <form name="jobportal" method="post">
 <?php
+
+// Use get to get the uid. And then edit them.
+//echo "<pre>"; print_r($_GET);
 include "connection.php";
 session_start();
 ini_set('display_errors', 1);
-print_r($_SESSION);
+//print_r($_SESSION);
 $Username=$_SESSION['user'];
 //print_r($Username);
 $con=mysqli_connect($databases['host'],$databases['user'],$databases['pass'],$databases['database']);
-$sql="SELECT username,email FROM users where username='$Username'";
+$sql="SELECT uid,username,email FROM users where username='$Username'";
 $result=mysqli_query($con,$sql);
-while($row=mysqli_fetch_array($result)){
+//while($row=mysqli_fetch_array($result)){
   // print_r($row);
+if(mysqli_num_rows($result) > 0 ){
+$row = mysqli_fetch_assoc($result);
+$name = $row["username"]; 
+$user_id =  $row['uid'];
 ?>
   <table>
       <tr>
@@ -31,15 +38,7 @@ while($row=mysqli_fetch_array($result)){
         <td><div type="text" id="email_error"><img src="" id="email1" height="25" width="30"></div></td>
       </tr>
       <tr>
-        <td>Role*</td>
-        <td><select name="roles"><option value="User">User</option>
-                                                        <option value="Company">Company</option>
-                                                        <option value="Admin">Admin</option>
-                 </select>
-        </td>
-      </tr>
-      <tr>
-        <td><input type="submit" value="Submit"></td>
+        <td><input type="submit" value="Submit" onclick="validateUser()"></td>
       </tr>
   </table>
 </form>
@@ -47,12 +46,12 @@ while($row=mysqli_fetch_array($result)){
 <?php
 ini_set('display_errors', 1);
 }
+ini_set('display_errors', 1);
 if (isset($_POST['uname']) && isset($_POST['email'])) {
   $username=$_POST['uname'];
   $email=$_POST['email'];
-  $roles=$_POST['roles'];
-  $sql1="UPDATE users set username='$username',email='email',role='$roles' where username='$Username'";
-  print_r($sql1);
+  $sql1="UPDATE users set username='$username',email='$email' where username='$Username'";
+  //print_r($sql1);
   
   $result=mysqli_query($con,$sql1);
   if($result) {
@@ -62,11 +61,6 @@ if (isset($_POST['uname']) && isset($_POST['email'])) {
     echo "Failed";
   }
 }
-
-
-
-
 ?>
-
 </body>
 </html>
