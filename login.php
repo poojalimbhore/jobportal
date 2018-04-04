@@ -7,7 +7,7 @@ session_start();
   <title>Login Page</title>
 </head>
 <body>
-<form method="post" action="user-listing.php">
+<form method="post" action="">
   <table>
     <tr>
       <td>Username*</td>
@@ -18,7 +18,7 @@ session_start();
      <td><input type="password" name="password" placeholder="Enter valid password"></td>
     </tr>
     <tr>
-      <td><input type="Submit" value="Login"></td>
+      <td><input type="submit" value="login">Login</td>
     </tr>
   </table>
 </form>
@@ -31,20 +31,20 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
   $passenc=md5($_POST['password']);
   $sql="SELECT username from users where username='$user' && password='$passenc'";
   $result=mysqli_query($con,$sql);
- 
   if(mysqli_num_rows($result) > 0 ) {
+    $row=mysqli_fetch_array($result);
     echo "Valid Username";
     echo "<br>";
     echo "Valid Password";
     $_SESSION['user']=$_POST['username'];
    // print_r($_SESSION);
-  // header("location:user-listing.php");
+  header("location:user-listing.php");
+  exit();
 }
   else {
     echo "Invalid Username/Password";
   }
 }
-
 ?>
 </body>
 </html>

@@ -37,8 +37,9 @@ while(mysqli_num_rows($result) > 0){
    $id=$row['uid'];
    print_r($id);
   
-   //header("Location:profile_edit.php?uid=" . $id); 
+   header("Location:profile_edit.php?uid=" . $id); 
    print_r($row); 
+   exit;
 }
 ?>
 </body>
